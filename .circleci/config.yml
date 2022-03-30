@@ -37,7 +37,7 @@ jobs:
             - persist_to_workspace:
                   destination: "artifacts"
                   root: "app/src-tauri/target/release/bundle"
-                  paths: "appimage/*"
+                  paths: "appimage/demo_*.AppImage*"
             - save_cache:
                   key: tauri-app-node-{{ arch }}-{{ .Branch }}-{{ checksum "app/package-lock.json" }}
                   paths:
@@ -70,3 +70,6 @@ workflows:
             - release-app:
                   requires:
                       - build-app
+                  filters:
+                      branches:
+                          only: main
