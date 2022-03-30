@@ -6,7 +6,6 @@ jobs:
             - image: cimg/rust:1.59.0-node
         steps:
             - checkout
-            - run: "cd app"
             - restore_cache:
                   keys:
                       - tauri-app-node-{{ arch }}-{{ .Branch }}-{{ checksum "app/package-lock.json" }}
@@ -22,10 +21,10 @@ jobs:
                   librsvg2-dev
             - run:
                   name: "Install npm tools"
-                  command: "npm install"
+                  command: "cd app && npm install"
             - run:
                   name: "Build app"
-                  command: "npm run tauri build"
+                  command: "cd app && npm run tauri build"
             - persist_to_workspace:
                   destination: "artifacts"
                   root: "src-tauri/target/release/bundle"
