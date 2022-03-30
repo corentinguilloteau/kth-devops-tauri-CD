@@ -45,7 +45,7 @@ jobs:
             - checkout
             - attach_workspace:
                   at: ./artifacts
-            - run: "apt install jq"
+            - run: "apk add jq"
             - run:
                   name: "Publish Release on GitHub"
                   command: |
