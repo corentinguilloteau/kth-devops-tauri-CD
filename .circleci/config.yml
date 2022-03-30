@@ -25,10 +25,12 @@ jobs:
         steps:
             - attach_workspace:
                   at: ./artifacts
+            - checkout
+            - run: "apt install jq"
             - run:
                   name: "Publish Release on GitHub"
                   command: |
-                      VERSION=$(my-binary --version)
+                      VERSION=$(cat ./app/src-tauri/tauri.conf.json | jq -y '.package.version')
                       ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} ./artifacts/
 
 # Invoke jobs via workflows
@@ -37,3 +39,4 @@ workflows:
     app:
         jobs:
             - build-app
+            - release-app
