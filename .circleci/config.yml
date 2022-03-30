@@ -4,6 +4,7 @@ jobs:
     build-app:
         docker:
             - image: cimg/rust:1.59.0-node
+        resource_class: medium
         steps:
             - checkout
             - restore_cache:
@@ -27,16 +28,16 @@ jobs:
                   command: "cd app && npm run tauri build"
             - persist_to_workspace:
                   destination: "artifacts"
-                  root: "src-tauri/target/release/bundle"
+                  root: "app/src-tauri/target/release/bundle"
                   paths: "appimage/*"
             - save_cache:
                   key: tauri-app-node-{{ arch }}-{{ .Branch }}-{{ checksum "app/package-lock.json" }}
                   paths:
-                      - "node_modules"
+                      - "app/node_modules"
             - save_cache:
                   key: tauri-app-cargo-{{ arch }}-{{ .Branch }}-{{ checksum "app/src-tauri/Cargo.lock" }}
                   paths:
-                      - "src-tauri/target"
+                      - "app/src-tauri/target"
     release-app:
         docker:
             - image: cibuilds/github:0.10
