@@ -10,7 +10,15 @@ jobs:
             - restore_cache:
                   keys:
                       - tauri-app-node-{{ arch }}-{{ .Branch }}-{{ checksum "app/package-lock.json" }}
+                      - tauri-app-node-{{ arch }}-{{ .Branch }}
+                      - tauri-app-node-{{ arch }}-
+                      - tauri-app-node-
+            - restore_cache:
+                  keys:
                       - tauri-app-cargo-{{ arch }}-{{ .Branch }}-{{ checksum "app/src-tauri/Cargo.lock" }}
+                      - tauri-app-cargo-{{ arch }}-{{ .Branch }}-
+                      - tauri-app-cargo-{{ arch }}
+                      - tauri-app-cargo
             - run: |
                   sudo apt update && sudo apt install libwebkit2gtk-4.0-dev \
                   build-essential \
