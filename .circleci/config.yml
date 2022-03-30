@@ -9,8 +9,8 @@ jobs:
             - run: "cd app"
             - restore_cache:
                   keys:
-                      - tauri-app-node-{{ arch }}-{{ .Branch }}-{{ checksum "src-tauri/package-lock.json" }}
-                      - tauri-app-cargo-{{ arch }}-{{ .Branch }}-{{ checksum "src-tauri/Cargo.lock" }}
+                      - tauri-app-node-{{ arch }}-{{ .Branch }}-{{ checksum "app/package-lock.json" }}
+                      - tauri-app-cargo-{{ arch }}-{{ .Branch }}-{{ checksum "app/src-tauri/Cargo.lock" }}
             - run:
                   name: "Install tauri"
                   command: "cargo install tauri-cli --version ^1.0.0-rc.8"
@@ -25,11 +25,11 @@ jobs:
                   root: "src-tauri/target/release/bundle"
                   paths: "appimage/*"
             - save_cache:
-                  key: tauri-app-node-{{ arch }}-{{ .Branch }}-{{ checksum "package-lock.json" }}
+                  key: tauri-app-node-{{ arch }}-{{ .Branch }}-{{ checksum "app/package-lock.json" }}
                   paths:
                       - "node_modules"
             - save_cache:
-                  key: tauri-app-cargo-{{ arch }}-{{ .Branch }}-{{ checksum "src-tauri/Cargo.lock" }}
+                  key: tauri-app-cargo-{{ arch }}-{{ .Branch }}-{{ checksum "app/src-tauri/Cargo.lock" }}
                   paths:
                       - "src-tauri/target"
     release-app:
