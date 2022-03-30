@@ -21,14 +21,11 @@ jobs:
                   libappindicator3-dev \
                   librsvg2-dev
             - run:
-                  name: "Install tauri"
-                  command: "cargo install tauri-cli --version ^1.0.0-rc.8"
-            - run:
                   name: "Install npm tools"
                   command: "npm install"
             - run:
                   name: "Build app"
-                  command: "cargo tauri build"
+                  command: "npm run tauri build"
             - persist_to_workspace:
                   destination: "artifacts"
                   root: "src-tauri/target/release/bundle"
