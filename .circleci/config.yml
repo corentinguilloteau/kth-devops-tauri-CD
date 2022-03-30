@@ -17,8 +17,8 @@ jobs:
                   name: "Build app"
                   command: "cargo tauri build"
             - persist_to_workspace:
-                  root: "src-tauri/target/release/bundle"
-                  paths: "appimage/*"
+                  destination: "artifacts"
+                  paths: "src-tauri/target/release/bundle/appimage"
     release-app:
         docker:
             - image: cibuilds/github:0.10
@@ -40,4 +40,5 @@ workflows:
         jobs:
             - build-app
             - release-app:
-                  requires: build-app
+                  requires:
+                      - build-app
