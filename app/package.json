@@ -6,7 +6,7 @@
 		"dev": "vite",
 		"build": "npx tsc && vite build",
 		"preview": "vite preview",
-		"tauri": "tauri"
+		"tauri": "npx tauri"
 	},
 	"dependencies": {
 		"@tauri-apps/api": "^1.0.0-rc.3",
