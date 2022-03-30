@@ -3,12 +3,15 @@ version: 2.1
 jobs:
     build-app:
         docker:
-            - image: cimg/rust:1.59.0
+            - image: cimg/rust:1.59.0-node
         steps:
             - checkout
             - run:
                   name: "Install tauri"
                   command: "cargo install tauri-cli --locked --version ^1.0.0-rc.8"
+            - run:
+                  name: "Install npm tools"
+                  command: "npm install"
             - run:
                   name: "Build app"
                   command: "cargo tauri build"
