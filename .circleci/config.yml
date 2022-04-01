@@ -34,6 +34,9 @@ jobs:
             - run:
                   name: "Build app"
                   command: "cd app && npm run tauri build"
+                  environment:
+                      TAURI_PRIVATE_KEY: ${UPDATE_SIGNING_PK}
+                      TAURI_KEY_PASSWORD: ${UPDATE_SIGNING_PASSWORD}
             - persist_to_workspace:
                   destination: "artifacts"
                   root: "app/src-tauri/target/release/bundle"
