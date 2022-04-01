@@ -23,8 +23,8 @@ router.get(
 		.isString()
 		.escape()
 		.matches(/^[0-9]+\.[0-9]+\.[0-9]+$/),
-	function (req, res, next) {
-		const update = db.getLatestUpdate(req.params.target);
+	async function (req, res, next) {
+		const update = await db.getLatestUpdate(req.params.target);
 
 		if (update !== null && compareVersions(update.version, req.params.version) === 1) {
 			// An update is available
@@ -66,9 +66,9 @@ router.post(
 		.escape(),
 	check("signature").exists().isBase64().escape(),
 	check("auth").exists().isString().escape(),
-	function (req, res, next) {
+	async function (req, res, next) {
 		if (process.env.AUTH_SECRET && req.params.auth === process.env.AUTH_SECRET) {
-			db.addNewVersion(req.params.target, req.params.version, req.params.url, req.params.signature);
+			await db.addNewVersion(req.params.target, req.params.version, req.params.url, req.params.signature);
 
 			res.sendStatus(200);
 		} else {
