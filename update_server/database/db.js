@@ -1,12 +1,16 @@
 const sqlite3 = require("sqlite3").verbose();
+import { open } from "sqlite";
 const path = require("path");
 
-function newDatabaseConnection() {
-	return new sqlite3.Database("./database/stores/updates.sqlite3");
+async function newDatabaseConnection() {
+	return open({
+		filename: "./database/stores/updates.sqlite3",
+		driver: sqlite3.Database,
+	});
 }
 
 async function getLatestUpdate(target) {
-	updateDatabase = newDatabaseConnection();
+	updateDatabase = await newDatabaseConnection();
 
 	const data = await updateDatabase
 		.prepare(`SELECT * FROM UPDATES WHERE target = ? ORDER BY ID DESC LIMIT 1`)
@@ -16,7 +20,7 @@ async function getLatestUpdate(target) {
 }
 
 async function addNewVersion(target, version, url, signature) {
-	updateDatabase = newDatabaseConnection();
+	updateDatabase = await newDatabaseConnection();
 
 	await updateDatabase
 		.prepare(`INSERT INTO UPDATES (target, version, url, signature) VALUES (?, ?, ?, ?)`)
