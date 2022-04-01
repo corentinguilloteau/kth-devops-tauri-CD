@@ -14,7 +14,11 @@ async function getLatestUpdate(target) {
 
 	const data = await updateDatabase.get(`SELECT * FROM UPDATES WHERE target = ? ORDER BY ID DESC LIMIT 1`, target);
 
-	return { url: data.url, signature: data.signature, version: data.version };
+	if (data === undefined) {
+		return null;
+	} else {
+		return { url: data.url, signature: data.signature, version: data.version };
+	}
 }
 
 async function addNewVersion(target, version, url, signature) {
