@@ -26,9 +26,9 @@ router.get(
 	function (req, res, next) {
 		const update = db.getLatestUpdate(req.params.target);
 
-		if (update !== null && compareVersions(data.version, req.params.version) === 1) {
+		if (update !== null && compareVersions(update.version, req.params.version) === 1) {
 			// An update is available
-			res.json(data);
+			res.json(update);
 		} else {
 			res.sendStatus(204);
 		}
