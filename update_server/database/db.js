@@ -8,9 +8,7 @@ function newDatabaseConnection() {
 function getLatestUpdate(target) {
 	updateDatabase = newDatabaseConnection();
 
-	const data = updateDatabase
-		.prepare(`SELECT * FROM UPDATES WHERE target = ? ORDER BY ID DESC LIMIT 1`)
-		.params([target]);
+	const data = updateDatabase.prepare(`SELECT * FROM UPDATES WHERE target = ? ORDER BY ID DESC LIMIT 1`).run(target);
 
 	return { url: data.url, signature: data.signature, version: data.version };
 }
@@ -20,7 +18,7 @@ function addNewVersion(target, version, url, signature) {
 
 	updateDatabase
 		.prepare(`INSERT INTO UPDATES (target, version, url, signature) VALUES (?, ?, ?, ?)`)
-		.params([target, version, url, signature]);
+		.run(target, version, url, signature);
 }
 
 module.exports = { getLatestUpdate, addNewVersion, newDatabaseConnection };
