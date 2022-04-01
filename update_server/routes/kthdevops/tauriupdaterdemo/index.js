@@ -8,7 +8,15 @@ const targets = ["windows", "linux", "macos"];
 /* GET latest update. */
 router.get(
 	"/:target/:version",
-	check("target").exists().isString().escape().if(!targets.includes(target)),
+	check("target")
+		.exists()
+		.isString()
+		.escape()
+		.custom((value) => {
+			if (!targets.includes(value)) {
+				throw new Error("Invalid target");
+			}
+		}),
 	check("version")
 		.exists()
 		.isString()
@@ -29,7 +37,16 @@ router.get(
 /* POST latest update. */
 router.post(
 	"/",
-	check("target").exists().isString().escape().if(!targets.includes(target)).escape(),
+	check("target")
+		.exists()
+		.isString()
+		.escape()
+		.custom((value) => {
+			if (!targets.includes(value)) {
+				throw new Error("Invalid target");
+			}
+		})
+		.escape(),
 	check("version")
 		.exists()
 		.isString()

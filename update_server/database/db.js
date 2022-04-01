@@ -1,8 +1,13 @@
 const sqlite3 = require("sqlite3").verbose();
+const path = require("path");
 
-const updateDatabase = new sqlite3.Database(path.resolve("./stores/updates.db"), { fileMustExist: true });
+function newDatabaseConnection() {
+	return new sqlite3.Database(":memory:");
+}
 
 function getLatestUpdate(target) {
+	updateDatabase = newDatabaseConnection();
+
 	const data = updateDatabase
 		.prepare(`SELECT * FROM UPDATES WHERE target = ? ORDER BY ID DESC LIMIT 1`)
 		.params([target]);
@@ -11,9 +16,11 @@ function getLatestUpdate(target) {
 }
 
 function addNewVersion(target, version, url, signature) {
+	updateDatabase = newDatabaseConnection();
+
 	updateDatabase
 		.prepare(`INSERT INTO UPDATES (target, version, url, signature) VALUES (?, ?, ?, ?)`)
 		.params([target, version, url, signature]);
 }
 
-export { getLatestUpdate, addNewVersion };
+module.exports = { getLatestUpdate, addNewVersion, newDatabaseConnection };
