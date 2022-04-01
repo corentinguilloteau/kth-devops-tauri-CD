@@ -2,7 +2,9 @@ var express = require("express");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
-require("./database/install");
+var installDB = require("./database/install");
+
+installDB();
 
 var updaterDemoRouter = require("./routes//kthdevops/tauriupdaterdemo/index.js");
 
