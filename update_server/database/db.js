@@ -1,5 +1,5 @@
 const sqlite3 = require("sqlite3").verbose();
-import { open } from "sqlite";
+const { open } = require("sqlite");
 const path = require("path");
 
 async function newDatabaseConnection() {
