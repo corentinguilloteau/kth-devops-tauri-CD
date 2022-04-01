@@ -2,7 +2,7 @@ const sqlite3 = require("sqlite3").verbose();
 const path = require("path");
 
 function newDatabaseConnection() {
-	return new sqlite3.Database(":memory:");
+	return new sqlite3.Database("./database/stores/updates.sqlite3");
 }
 
 function getLatestUpdate(target) {
