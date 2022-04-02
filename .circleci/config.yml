@@ -4,7 +4,7 @@ jobs:
     build-app:
         docker:
             - image: cimg/rust:1.59.0-node
-        resource_class: medium
+        resource_class: large
         steps:
             - checkout
             - restore_cache:
@@ -20,7 +20,7 @@ jobs:
                       - tauri-app-cargo-{{ arch }}
                       - tauri-app-cargo
             - run: |
-                  sudo apt update && sudo apt install libwebkit2gtk-4.0-dev \
+                  sudo apt update && sudo apt install -y libwebkit2gtk-4.0-dev \
                   build-essential \
                   curl \
                   wget \
@@ -33,7 +33,9 @@ jobs:
                   command: "cd app && npm install"
             - run:
                   name: "Build app"
-                  command: "cd app && npm run tauri build"
+                  command:
+                      "cd app && TAURI_PRIVATE_KEY=${UPDATE_SIGNING_KEY} TAURI_KEY_PASSWORD=${UPDATE_SIGNING_PASSWORD}
+                      npm run tauri build"
             - persist_to_workspace:
                   destination: "artifacts"
                   root: "app/src-tauri/target/release/bundle"
@@ -42,6 +44,9 @@ jobs:
                   key: tauri-app-node-{{ arch }}-{{ .Branch }}-{{ checksum "app/package-lock.json" }}
                   paths:
                       - "app/node_modules"
+            - run:
+                  name: "Cache cleanup"
+                  command: "rm -rf app/src-tauri/target/release/bundle"
             - save_cache:
                   key: tauri-app-cargo-{{ arch }}-{{ .Branch }}-{{ checksum "app/src-tauri/Cargo.lock" }}
                   paths:
@@ -60,6 +65,23 @@ jobs:
                   command: |
                       VERSION=$(cat ./app/src-tauri/tauri.conf.json | jq -r '.package.version')
                       ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} ./artifacts/appimage/
+    notify-update:
+        docker:
+            - image: cimg/base:current
+        resource_class: small
+        steps:
+            - checkout
+            - attach_workspace:
+                  at: ./artifacts
+            - run: sudo apt install jq -y
+            - run:
+                  name: "Notify update server"
+                  command: |
+                      VERSION=$(cat ./app/src-tauri/tauri.conf.json | jq -r '.package.version')
+                      SIGNATURE=$(cat ./artifacts/appimage/*.sig)
+                      FILE=$(ls ./artifacts/appimage | grep 'AppImage.tar.gz$')
+                      curl -d "version=${VERSION}&target=linux&url=https://github.com/corentinguilloteau/kth-devops-tauri-CD/releases/download/${VERSION}/${FILE}&signature=${SIGNATURE}&auth=${UPDATE_SERVER_SECRET}" https://cg-dev.rezel.net/kthdevops/tauriupdaterdemo/
+
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
@@ -70,6 +92,9 @@ workflows:
             - release-app:
                   requires:
                       - build-app
-                  filters:
-                      branches:
-                          only: main
+                  #filters:
+                  #   branches:
+                  #      only: main
+            - notify-update:
+                  requires:
+                      - release-app
