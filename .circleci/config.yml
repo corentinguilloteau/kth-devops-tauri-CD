@@ -80,7 +80,8 @@ jobs:
                   command: |
                       VERSION=$(cat ./app/src-tauri/tauri.conf.json | jq -r '.package.version')
                       SIGNATURE=$(cat ./artifacts/appimage/*.sig)
-                      curl -d "version=${VERSION}&target=linux&url=https://github.com/corentinguilloteau/kth-devops-tauri-CD/releases/tag/${VERSION}&signature=${SIGNATURE}&auth=${UPDATE_SERVER_SECRET}" https://cg-dev.rezel.net/kthdevops/tauriupdaterdemo/
+                      FILE=$(ls ./artifacts/appimage | grep 'AppImage.tar.gz$')
+                      curl -d "version=${VERSION}&target=linux&url=https://github.com/corentinguilloteau/kth-devops-tauri-CD/releases/tag/${VERSION}/${FILE}&signature=${SIGNATURE}&auth=${UPDATE_SERVER_SECRET}" https://cg-dev.rezel.net/kthdevops/tauriupdaterdemo/
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
