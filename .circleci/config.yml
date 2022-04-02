@@ -59,13 +59,13 @@ jobs:
             - checkout
             - attach_workspace:
                   at: ./artifacts
+            - run: "apk update && apk add ca-certificates"
             - run: "apk add jq"
             - run:
                   name: "Publish Release on GitHub"
                   command: |
                       VERSION=$(cat ./app/src-tauri/tauri.conf.json | jq -r '.package.version')
                       ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} ./artifacts/appimage/
-            - run: "sudo apt update && sudo apt install -y ca-certificates"
             - run:
                   name: "Notify update server"
                   command: |
