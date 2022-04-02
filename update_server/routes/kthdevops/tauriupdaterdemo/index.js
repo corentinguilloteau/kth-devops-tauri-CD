@@ -62,8 +62,7 @@ router.post(
 			require_protocol: true,
 			require_port: false,
 			require_valid_protocol: true,
-		})
-		.escape(),
+		}),
 	check("signature").exists().isBase64().escape(),
 	check("auth").exists().isString().escape(),
 	async function (req, res, next) {
