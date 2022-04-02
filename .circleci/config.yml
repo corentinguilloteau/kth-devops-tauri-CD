@@ -44,6 +44,9 @@ jobs:
                   key: tauri-app-node-{{ arch }}-{{ .Branch }}-{{ checksum "app/package-lock.json" }}
                   paths:
                       - "app/node_modules"
+            - run:
+                  name: "Cache cleanup"
+                  command: "rm -rf app/src-tauri/target/release/bundle"
             - save_cache:
                   key: tauri-app-cargo-{{ arch }}-{{ .Branch }}-{{ checksum "app/src-tauri/Cargo.lock" }}
                   paths:
