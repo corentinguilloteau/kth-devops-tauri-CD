@@ -49,7 +49,7 @@
 			"active": true,
 			"endpoints": ["https://cg-dev.rezel.net/kthdevops/tauriupdaterdemo/{{target}}/{{current_version}}"],
 			"dialog": true,
-			"pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IEQ1MzMyOUI0QkQzOTgxNzIKUldSeWdUbTl0Q2t6MVQwejdyaitZU2V4bk55ZDN5ZlhBMmdjT0V2THJ4Z1J0UUw0V2xIZktsMXcK"
+			"pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDcwNEU3MUU3QzExNjExQ0MKUldUTUVSYkI1M0ZPY0pkZU9OOHJ3eTNRMFF2bnJFZXY4RlhhU1Z5bUZNOFdjazhHTXZSY0w1UXQK"
 		},
 		"allowlist": {
 			"all": true
