@@ -67,8 +67,8 @@ router.post(
 	check("signature").exists().isBase64().escape(),
 	check("auth").exists().isString().escape(),
 	async function (req, res, next) {
-		if (process.env.AUTH_SECRET && req.params.auth === process.env.AUTH_SECRET) {
-			await db.addNewVersion(req.params.target, req.params.version, req.params.url, req.params.signature);
+		if (process.env.AUTH_SECRET && req.body.auth === process.env.AUTH_SECRET) {
+			await db.addNewVersion(req.body.target, req.body.version, req.body.url, req.body.signature);
 
 			res.sendStatus(200);
 		} else {
