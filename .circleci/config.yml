@@ -94,3 +94,6 @@ workflows:
                   #filters:
                   #   branches:
                   #      only: main
+            - notify-update:
+                  requires:
+                      - release-app
