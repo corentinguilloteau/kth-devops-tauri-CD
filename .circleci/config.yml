@@ -65,7 +65,6 @@ jobs:
                   command: |
                       VERSION=$(cat ./app/src-tauri/tauri.conf.json | jq -r '.package.version')
                       ghr -t ${GITHUB_TOKEN} -u ${CIRCLE_PROJECT_USERNAME} -r ${CIRCLE_PROJECT_REPONAME} -c ${CIRCLE_SHA1} -delete ${VERSION} ./artifacts/appimage/
-
     notify-update:
         docker:
             - image: cimg/base:current
@@ -82,6 +81,7 @@ jobs:
                       SIGNATURE=$(cat ./artifacts/appimage/*.sig)
                       FILE=$(ls ./artifacts/appimage | grep 'AppImage.tar.gz$')
                       curl -d "version=${VERSION}&target=linux&url=https://github.com/corentinguilloteau/kth-devops-tauri-CD/releases/download/${VERSION}/${FILE}&signature=${SIGNATURE}&auth=${UPDATE_SERVER_SECRET}" https://cg-dev.rezel.net/kthdevops/tauriupdaterdemo/
+
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
