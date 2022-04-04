@@ -6,6 +6,10 @@ const compareVersions = require("compare-versions");
 
 const targets = ["windows", "linux", "macos"];
 
+router.get("/changelog", (req, res) => {
+	res.redirect("https://xkcd.com/1172/");
+});
+
 /* GET latest update. */
 router.get(
 	"/:target/:version",
@@ -27,6 +31,7 @@ router.get(
 		const update = await db.getLatestUpdate(req.params.target);
 
 		if (update !== null && compareVersions(update.version, req.params.version) === 1) {
+			update.notes = "Read changelog at https://cg-dev.rezel.net/kthdevops/tauriupdaterdemo/changelog";
 			// An update is available
 			res.json(update);
 		} else {
