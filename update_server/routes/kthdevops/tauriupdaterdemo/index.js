@@ -6,7 +6,7 @@ const compareVersions = require("compare-versions");
 
 const targets = ["windows", "linux", "macos"];
 
-router.get((req, res) => {
+router.get('/changelog"/cahngelog', (req, res) => {
 	res.redirect("https://xkcd.com/1172/");
 });
 
