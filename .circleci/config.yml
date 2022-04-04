@@ -82,7 +82,6 @@ jobs:
                       FILE=$(ls ./artifacts/appimage | grep 'AppImage.tar.gz$')
                       curl -d "version=${VERSION}&target=linux&url=https://github.com/corentinguilloteau/kth-devops-tauri-CD/releases/download/${VERSION}/${FILE}&signature=${SIGNATURE}&auth=${UPDATE_SERVER_SECRET}" https://cg-dev.rezel.net/kthdevops/tauriupdaterdemo/
 
-
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
 workflows:
@@ -92,9 +91,9 @@ workflows:
             - release-app:
                   requires:
                       - build-app
-                  #filters:
-                  #   branches:
-                  #      only: main
+                  filters:
+                      branches:
+                          only: main
             - notify-update:
                   requires:
                       - release-app
