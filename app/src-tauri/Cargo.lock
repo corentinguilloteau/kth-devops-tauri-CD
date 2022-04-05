@@ -3009,9 +3009,8 @@ dependencies = [
 
 [[package]]
 name = "tauri"
-version = "1.0.0-rc.6"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f6d514a34b3f9a07e2002d95e1371b42a446636e3d571a59e974b21d6acf3007"
+version = "1.0.0-rc.5"
+source = "git+https://github.com/corentinguilloteau/tauri?branch=demo#50de2c609419faed252b99085693692499e0992a"
 dependencies = [
  "anyhow",
  "attohttpc",
@@ -3052,7 +3051,7 @@ dependencies = [
  "tauri-macros",
  "tauri-runtime",
  "tauri-runtime-wry",
- "tauri-utils",
+ "tauri-utils 1.0.0-rc.4 (git+https://github.com/corentinguilloteau/tauri?branch=demo)",
  "tempfile",
  "thiserror",
  "tokio",
@@ -3071,15 +3070,14 @@ dependencies = [
  "anyhow",
  "cargo_toml",
  "serde_json",
- "tauri-utils",
+ "tauri-utils 1.0.0-rc.4 (registry+https://github.com/rust-lang/crates.io-index)",
  "winres",
 ]
 
 [[package]]
 name = "tauri-codegen"
 version = "1.0.0-rc.4"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "54193ebdb010e85824301ce5f0940742b680d66376203f6425d549d2f32ad499"
+source = "git+https://github.com/corentinguilloteau/tauri?branch=demo#50de2c609419faed252b99085693692499e0992a"
 dependencies = [
  "base64",
  "brotli",
@@ -3091,7 +3089,7 @@ dependencies = [
  "serde",
  "serde_json",
  "sha2",
- "tauri-utils",
+ "tauri-utils 1.0.0-rc.4 (git+https://github.com/corentinguilloteau/tauri?branch=demo)",
  "thiserror",
  "uuid",
  "walkdir",
@@ -3100,22 +3098,20 @@ dependencies = [
 [[package]]
 name = "tauri-macros"
 version = "1.0.0-rc.4"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c8b867ef4703cb8e50f128ee3c941895d94c01e0ebd9007a7b45ecca52516dbf"
+source = "git+https://github.com/corentinguilloteau/tauri?branch=demo#50de2c609419faed252b99085693692499e0992a"
 dependencies = [
  "heck 0.4.0",
  "proc-macro2",
  "quote",
  "syn",
  "tauri-codegen",
- "tauri-utils",
+ "tauri-utils 1.0.0-rc.4 (git+https://github.com/corentinguilloteau/tauri?branch=demo)",
 ]
 
 [[package]]
 name = "tauri-runtime"
 version = "0.3.4"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5b289ac8eafc52a36425fcaf3de23febd0b2606d3cce2b39ac412a1817fae537"
+source = "git+https://github.com/corentinguilloteau/tauri?branch=demo#50de2c609419faed252b99085693692499e0992a"
 dependencies = [
  "gtk",
  "http",
@@ -3123,7 +3119,7 @@ dependencies = [
  "infer",
  "serde",
  "serde_json",
- "tauri-utils",
+ "tauri-utils 1.0.0-rc.4 (git+https://github.com/corentinguilloteau/tauri?branch=demo)",
  "thiserror",
  "uuid",
  "webview2-com",
@@ -3132,14 +3128,13 @@ dependencies = [
 
 [[package]]
 name = "tauri-runtime-wry"
-version = "0.3.5"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "6a8bf16e0476a8249aa2c75e7b49ec4c059be5fb27d9f6514e30ed327e8e9fa2"
+version = "0.3.4"
+source = "git+https://github.com/corentinguilloteau/tauri?branch=demo#50de2c609419faed252b99085693692499e0992a"
 dependencies = [
  "gtk",
  "rand 0.8.5",
  "tauri-runtime",
- "tauri-utils",
+ "tauri-utils 1.0.0-rc.4 (git+https://github.com/corentinguilloteau/tauri?branch=demo)",
  "uuid",
  "webview2-com",
  "windows 0.30.0",
@@ -3152,7 +3147,6 @@ version = "1.0.0-rc.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "a67fcf8fdd1340de4e75c01966fceab03057a8b0e97864eb39a21e420deed503"
 dependencies = [
- "brotli",
  "ctor",
  "glob",
  "heck 0.4.0",
@@ -3169,6 +3163,28 @@ dependencies = [
  "thiserror",
  "url",
  "walkdir",
+]
+
+[[package]]
+name = "tauri-utils"
+version = "1.0.0-rc.4"
+source = "git+https://github.com/corentinguilloteau/tauri?branch=demo#50de2c609419faed252b99085693692499e0992a"
+dependencies = [
+ "brotli",
+ "ctor",
+ "heck 0.4.0",
+ "html5ever",
+ "json-patch",
+ "kuchiki",
+ "phf 0.10.1",
+ "proc-macro2",
+ "quote",
+ "serde",
+ "serde_json",
+ "serde_with",
+ "serialize-to-javascript",
+ "thiserror",
+ "url",
 ]
 
 [[package]]
