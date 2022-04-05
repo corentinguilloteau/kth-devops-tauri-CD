@@ -31,7 +31,7 @@ function App() {
 				</p>
 				<p>{message}</p>
 				<p>
-					Edit <code>App.tsx</code> and save to test HMR updates.
+					Edit <code>App.tsx</code> and save to test HMR updates. 🐛
 				</p>
 				<p>
 					<a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
