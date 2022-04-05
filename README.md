@@ -1,6 +1,6 @@
 [![build](https://img.shields.io/circleci/build/github/corentinguilloteau/kth-devops-tauri-CD/main)](build)
 
-# Demonstration of Continuous Delivery of a Tauri app
+# Demonstration of Continuous Deployment of a Tauri app
 
 This repository holds the code used for the demonstration of CD of a Tauri app, during the
 [DD2482](https://github.com/KTH/devops-course) course.
