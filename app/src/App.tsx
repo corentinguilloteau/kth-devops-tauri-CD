@@ -32,9 +32,6 @@ function App() {
 				<p>{message}</p>
 				<p>
 					Edit <code>App.tsx</code> and save to test HMR updates.
-					<img
-						src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/microsoft/310/bug_1f41b.png"
-						style={{ width: "2rem" }}></img>
 				</p>
 				<p>
 					<a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
