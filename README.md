@@ -65,7 +65,7 @@ your app with the new version
 # Note on the tauri version
 
 As I write this demonstration, Tauri updater has a hardcoded timeout set to 20 seconds for the update downloading. This
-can result in errors if your network connection is not fast enough. A fix has been proposed but in not included in the
+can result in errors if your network connection is not fast enough. A fix has been proposed but is not included in the
 v1.0.0-rc.8 which is the latest version at the time I'm writing this. I thus implemented a quick fix myself by setting
 this timeout at 2 minutes. The fix can be found in [this](https://github.com/corentinguilloteau/tauri/tree/demo)
 repository, which is used by the code in this demo. If you try to run this demo in the future, you might be able to use
